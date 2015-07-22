@@ -28,19 +28,19 @@ That's it, you can create SMS instances for your needs in your project.
 ```javascript
 // api/controllers/SMSController.js
 var twilio = SMSService.create('twilio', {
+  sender: '<SENDER_PHONE_NUMBER>',
+  recipient: ['ARRAY', 'OF', 'RECIPIENTS'],
+  message: 'This is SMS'
   provider: {
     accountSid: '<ACCOUNT_SID>',
     authToken: '<AUTH_TOKEN>'
-  },
-  message: {
-    body: 'Hello, there!'
   }
 });
 
 module.exports = {
   send: function(req, res) {
     twilio
-      .send(['TO_NUMBER_1', 'TO_NUMBER_2'])
+      .send(['AND', 'MORE', 'NUMBERS'], 'You can override message')
       .then(res.ok)
       .catch(res.serverError);
   }
@@ -49,10 +49,12 @@ module.exports = {
 
 ## Configuration
 
-When you instantiate new instance via `SMSService.create()` you can provide configuration object with 3 keys:
+When you instantiate new instance via `SMSService.create(type, config)` you can provide configuration object with next keys:
 
 - `config.provider` - {Object} Options that will go to each of SDKs
-- `config.message` - {Object} Options that will go to each of messages (it has one interface for each of providers, see below)
+- `config.sender` - {String} Number of sender
+- `config.recipient` - {Array} Array of strings with phone numbers of recipients
+- `config.message` - {String} Default message to send (you can override it in `send()`)
 
 ## API
 
@@ -64,9 +66,7 @@ Sends SMS.
 
 `recipient` - {Array} Phone numbers to which need to send (mixed up with pre-defined recipients).
 
-`message` - {Object} Config for message:
-
-  - `message.body` - Message body text
+`message` - {String} Message body text
 
 `config` - Additional configuration for message with specific platform. See appropriate documentation.
 
@@ -76,19 +76,16 @@ Sends SMS.
 
 ```javascript
 var twilio = SMSService.create('twilio', {
+  sender: '+123456789',
+  message: 'Hey, there!',
   provider: {
     accountSid: '<ACCOUNT_SID>',
     authToken: '<AUTH_TOKEN>'
-  },
-  message: {
-    body: 'Hey, there!'
   }
 });
 
 twilio
-  .send(['NUMBER_1', 'NUMBER_2'], {
-    body: 'You can override pre-defined'
-  })
+  .send(['+123456789', '+0987654321'])
   .then(console.log.bind(console))
   .catch(console.error.bind(console));
 ```
