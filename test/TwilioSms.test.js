@@ -27,7 +27,7 @@ describe('TwilioSms', function () {
     sms
       .send()
       .then(function (result) {
-        assert.equal(result, 'RESULT');
+        assert.isArray(result);
         assert.ok(sms.getProvider().messages.create.calledTwice);
         assert.deepPropertyVal(sms.getProvider().messages.create.getCall(0).args[0], 'from', 'ghaiklor');
         assert.deepPropertyVal(sms.getProvider().messages.create.getCall(0).args[0], 'to', 'other');
@@ -56,7 +56,7 @@ describe('TwilioSms', function () {
         message: 'And another message'
       })
       .then(function (result) {
-        assert.equal(result, 'RESULT');
+        assert.isArray(result);
         assert.ok(sms.getProvider().messages.create.calledTwice);
         assert.deepPropertyVal(sms.getProvider().messages.create.getCall(0).args[0], 'from', 'other_ghaiklor');
         assert.deepPropertyVal(sms.getProvider().messages.create.getCall(0).args[0], 'to', 'another');
