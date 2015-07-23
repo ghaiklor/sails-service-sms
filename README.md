@@ -40,7 +40,10 @@ var twilio = SMSService.create('twilio', {
 module.exports = {
   send: function(req, res) {
     twilio
-      .send(['AND', 'MORE', 'NUMBERS'], 'You can override message')
+      .send({
+        recipient: ['ANOTHER', 'NUMBERS'],
+        message: 'You can override message'
+      })
       .then(res.ok)
       .catch(res.serverError);
   }
@@ -60,15 +63,15 @@ When you instantiate new instance via `SMSService.create(type, config)` you can 
 
 Each of SMS instances has only one method:
 
-### send([recipient], [message], [config])
+### send([config])
 
-Sends SMS.
+Sends SMS and returns Promise.
 
-`recipient` - {Array} Phone numbers to which need to send (mixed up with pre-defined recipients).
+`config` - Configuration object for sending SMS:
 
-`message` - {String} Message body text
-
-`config` - Additional configuration for message with specific platform. See appropriate documentation.
+  - `config.sender` - {String} Sender's number
+  - `config.recipient` - {Array} Phone numbers to which need to send (mixed up with pre-defined recipients).
+  - `config.message` - {String} Message body text
 
 ## Examples
 
@@ -77,6 +80,7 @@ Sends SMS.
 ```javascript
 var twilio = SMSService.create('twilio', {
   sender: '+123456789',
+  recipient: [],
   message: 'Hey, there!',
   provider: {
     accountSid: '<ACCOUNT_SID>',
@@ -85,7 +89,10 @@ var twilio = SMSService.create('twilio', {
 });
 
 twilio
-  .send(['+123456789', '+0987654321'])
+  .send({
+    recipient: ['+0987654321'],
+    message: 'You can override here predefined config'
+  })
   .then(console.log.bind(console))
   .catch(console.error.bind(console));
 ```
