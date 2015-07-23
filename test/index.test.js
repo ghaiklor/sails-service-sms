@@ -10,7 +10,7 @@ describe('SmsService', function () {
   });
 
   it('Should properly create twilio instance', function () {
-    assert.instanceOf(SmsService.create('twilio'), TwilioSms);
+    assert.instanceOf(SmsService.create('twilio', {provider: {accountSid: 'test', authToken: 'test'}}), TwilioSms);
   });
 
   it('Should properly throw exception on create unrecognized', function () {
