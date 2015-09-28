@@ -22,14 +22,14 @@
   },
   "homepage": "https://github.com/ghaiklor/sails-service-sms#readme",
   "dependencies": {
-    "bluebird": "^2.9.25",
-    "lodash": "^3.10.0",
-    "twilio": "^2.2.0"
+    "bluebird": "2.10.1",
+    "lodash": "3.10.1",
+    "twilio": "2.4.0"
   },
   "devDependencies": {
-    "chai": "^3.2.0",
-    "istanbul": "^0.3.14",
-    "mocha": "^2.2.5",
-    "sinon": "^1.15.4"
+    "chai": "3.3.0",
+    "istanbul": "0.3.21",
+    "mocha": "2.3.3",
+    "sinon": "1.17.1"
   }
 }
