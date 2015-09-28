@@ -1,7 +1,7 @@
 import TwilioSms from './TwilioSms';
 
 const sms = {
-  twilio: require('./TwilioSms')
+  twilio: TwilioSms
 };
 
 /**
