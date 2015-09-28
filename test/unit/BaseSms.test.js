@@ -35,7 +35,7 @@ describe('BaseSms', () => {
   it('Should properly get/set provider', () => {
     let sms = new BaseSms();
 
-    assert.notOk(sms.getProvider());
+    assert.deepEqual(sms.getProvider(), {});
     assert.instanceOf(sms.setProvider('NOTIFICATION'), BaseSms);
     assert.equal(sms.getProvider(), 'NOTIFICATION');
   });

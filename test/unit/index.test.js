@@ -1,21 +1,17 @@
-var assert = require('chai').assert;
-var SmsService = require('../../index');
-var TwilioSms = SmsService.TwilioSms;
+import { assert } from 'chai';
+import SmsService from '../../src/index';
+import TwilioSms from '../../src/TwilioSms';
 
-describe('SmsService', function () {
-  it('Should properly export', function () {
-    assert.isObject(SmsService);
-    assert.isFunction(SmsService.create);
-    assert.isFunction(SmsService.TwilioSms);
+describe('SmsService', () => {
+  it('Should properly export', () => {
+    assert.isFunction(SmsService);
   });
 
-  it('Should properly create twilio instance', function () {
-    assert.instanceOf(SmsService.create('twilio', {provider: {accountSid: 'test', authToken: 'test'}}), TwilioSms);
+  it('Should properly create twilio instance', () => {
+    assert.instanceOf(SmsService('twilio', {provider: {accountSid: 'test', authToken: 'test'}}), TwilioSms);
   });
 
-  it('Should properly throw exception on create unrecognized', function () {
-    assert.throw(function () {
-      SmsService.create('NOT_EXISTS');
-    }, Error);
+  it('Should properly throw exception on create unrecognized', () => {
+    assert.throw(() => SmsService('NOT_EXISTS'), Error);
   });
 });
