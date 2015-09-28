@@ -1,6 +1,13 @@
 # sails-service-sms
 
-![Build Status](https://img.shields.io/travis/ghaiklor/sails-service-sms.svg) ![Coverage](https://img.shields.io/coveralls/ghaiklor/sails-service-sms.svg) ![Downloads](https://img.shields.io/npm/dm/sails-service-sms.svg) ![npm version](https://img.shields.io/npm/v/sails-service-sms.svg) ![dependencies](https://img.shields.io/david/ghaiklor/sails-service-sms.svg) ![dev dependencies](https://img.shields.io/david/dev/ghaiklor/sails-service-sms.svg) ![License](https://img.shields.io/npm/l/sails-service-sms.svg)
+![Build Status](https://img.shields.io/travis/ghaiklor/sails-service-sms.svg)
+![Coverage](https://img.shields.io/coveralls/ghaiklor/sails-service-sms.svg)
+![Downloads](https://img.shields.io/npm/dm/sails-service-sms.svg)
+![Downloads](https://img.shields.io/npm/dt/sails-service-sms.svg)
+![npm version](https://img.shields.io/npm/v/sails-service-sms.svg)
+![dependencies](https://img.shields.io/david/ghaiklor/sails-service-sms.svg)
+![dev dependencies](https://img.shields.io/david/dev/ghaiklor/sails-service-sms.svg)
+![License](https://img.shields.io/npm/l/sails-service-sms.svg)
 
 Service for Sails framework with SMS features.
 
@@ -16,28 +23,22 @@ Install this module.
 npm install sails-service-sms
 ```
 
-Then require it in your service.
+Then require it in your service and create sms instance.
 
 ```javascript
-// api/services/SMSService.js
-module.exports = require('sails-service-sms');
-```
+// api/services/SmsService.js
+import SmsService from 'sails-service-sms';
 
-That's it, you can create SMS instances for your needs in your project.
-
-```javascript
-// api/controllers/SMSController.js
-var twilio = SMSService.create('twilio', {
-  sender: '<SENDER_PHONE_NUMBER>',
-  recipient: ['ARRAY', 'OF', 'RECIPIENTS'],
-  message: 'This is SMS'
+export default SmsService('twilio', {
+  sender: '<TWILIO_NUMBER>',
   provider: {
-    accountSid: '<ACCOUNT_SID>',
-    authToken: '<AUTH_TOKEN>'
+    accountSid: '',
+    authToken: ''
   }
 });
 
-module.exports = {
+// api/controllers/SMSController.js
+export default {
   send: function(req, res) {
     twilio
       .send({
@@ -45,14 +46,14 @@ module.exports = {
         message: 'You can override message'
       })
       .then(res.ok)
-      .catch(res.serverError);
+      .catch(res.negotiate);
   }
 };
 ```
 
 ## Configuration
 
-When you instantiate new instance via `SMSService.create(type, config)` you can provide configuration object with next keys:
+When you instantiate new instance via `SMSService(type, config)` you can provide configuration object with next keys:
 
 - `config.provider` - {Object} Options that will go to each of SDKs
 - `config.sender` - {String} Number of sender
@@ -78,7 +79,7 @@ Sends SMS and returns Promise.
 ### TwilioSMS
 
 ```javascript
-var twilio = SMSService.create('twilio', {
+let twilio = SMSService('twilio', {
   sender: '+123456789',
   recipient: [],
   message: 'Hey, there!',
