@@ -1,5 +1,5 @@
 var assert = require('chai').assert;
-var SmsService = require('../');
+var SmsService = require('../../index');
 var TwilioSms = SmsService.TwilioSms;
 
 describe('SmsService', function () {

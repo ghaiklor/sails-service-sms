@@ -1,8 +1,8 @@
-var assert = require('chai').assert;
-var sinon = require('sinon');
-var TwilioSms = require('../lib/TwilioSms');
+import { assert } from 'chai';
+import sinon from 'sinon';
+import TwilioSms from '../../src/TwilioSms';
 
-var CONFIG = {
+const CONFIG = {
   sender: 'ghaiklor',
   recipient: ['other', 'number'],
   message: 'Default message',
@@ -12,21 +12,19 @@ var CONFIG = {
   }
 };
 
-describe('TwilioSms', function () {
-  it('Should properly export', function () {
+describe('TwilioSms', () => {
+  it('Should properly export', () => {
     assert.isFunction(TwilioSms);
   });
 
-  it('Should properly send sms with pre-defined config', function (done) {
-    var sms = new TwilioSms(CONFIG);
+  it('Should properly send sms with pre-defined config', done => {
+    let sms = new TwilioSms(CONFIG);
 
-    sinon.stub(sms.getProvider().messages, 'create', function (config, cb) {
-      cb(null, 'RESULT');
-    });
+    sinon.stub(sms.getProvider().messages, 'create', (config, cb) => cb(null, 'RESULT'));
 
     sms
       .send()
-      .then(function (result) {
+      .then(result => {
         assert.isArray(result);
         assert.ok(sms.getProvider().messages.create.calledTwice);
         assert.deepPropertyVal(sms.getProvider().messages.create.getCall(0).args[0], 'from', 'ghaiklor');
@@ -42,12 +40,10 @@ describe('TwilioSms', function () {
       .catch(done);
   });
 
-  it('Should properly send sms with new config', function (done) {
-    var sms = new TwilioSms(CONFIG);
+  it('Should properly send sms with new config', done => {
+    let sms = new TwilioSms(CONFIG);
 
-    sinon.stub(sms.getProvider().messages, 'create', function (config, cb) {
-      cb(null, 'RESULT');
-    });
+    sinon.stub(sms.getProvider().messages, 'create', (config, cb) => cb(null, 'RESULT'));
 
     sms
       .send({
@@ -55,7 +51,7 @@ describe('TwilioSms', function () {
         recipient: ['another', 'numbers'],
         message: 'And another message'
       })
-      .then(function (result) {
+      .then(result => {
         assert.isArray(result);
         assert.ok(sms.getProvider().messages.create.calledTwice);
         assert.deepPropertyVal(sms.getProvider().messages.create.getCall(0).args[0], 'from', 'other_ghaiklor');
@@ -71,17 +67,15 @@ describe('TwilioSms', function () {
       .catch(done);
   });
 
-  it('Should properly throw error on sending', function (done) {
-    var sms = new TwilioSms(CONFIG);
+  it('Should properly throw error on sending', done => {
+    let sms = new TwilioSms(CONFIG);
 
-    sinon.stub(sms.getProvider().messages, 'create', function (config, cb) {
-      cb(new Error('Some error occurred'));
-    });
+    sinon.stub(sms.getProvider().messages, 'create', (config, cb) => cb(new Error('Some error occurred')));
 
     sms
       .send()
       .then(done)
-      .catch(function (error) {
+      .catch(error => {
         assert.instanceOf(error, Error);
         assert.ok(sms.getProvider().messages.create.calledTwice);
         assert.deepPropertyVal(sms.getProvider().messages.create.getCall(0).args[0], 'from', 'ghaiklor');

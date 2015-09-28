@@ -1,18 +1,13 @@
-var assert = require('chai').assert;
-var BaseSms = require('../lib/BaseSms');
+import { assert } from 'chai';
+import BaseSms from '../../src/BaseSms';
 
-describe('BaseSms', function () {
-  it('Should properly export', function () {
+describe('BaseSms', () => {
+  it('Should properly export', () => {
     assert.isFunction(BaseSms);
-    assert.isFunction(BaseSms.prototype.get);
-    assert.isFunction(BaseSms.prototype.set);
-    assert.isFunction(BaseSms.prototype.getProvider);
-    assert.isFunction(BaseSms.prototype.setProvider);
-    assert.isFunction(BaseSms.prototype.send);
   });
 
-  it('Should properly make objects configurable', function () {
-    var sms = new BaseSms();
+  it('Should properly make objects configurable', () => {
+    let sms = new BaseSms();
 
     assert.notOk(sms.get('foo'));
     assert.instanceOf(sms.set('foo', 'bar'), BaseSms);
@@ -23,8 +18,8 @@ describe('BaseSms', function () {
     assert.equal(sms.get('foo'), 'bar');
   });
 
-  it('Should properly create sms with pre-defined config', function () {
-    var sms = new BaseSms({
+  it('Should properly create sms with pre-defined config', () => {
+    let sms = new BaseSms({
       foo: 'bar',
       obj: {
         foo: 'bar'
@@ -37,8 +32,8 @@ describe('BaseSms', function () {
     assert.notOk(sms.get('NOT_EXISTS'));
   });
 
-  it('Should properly get/set provider', function () {
-    var sms = new BaseSms();
+  it('Should properly get/set provider', () => {
+    let sms = new BaseSms();
 
     assert.notOk(sms.getProvider());
     assert.instanceOf(sms.setProvider('NOTIFICATION'), BaseSms);
