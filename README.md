@@ -40,7 +40,7 @@ export default SmsService('twilio', {
 // api/controllers/SMSController.js
 export default {
   send: function(req, res) {
-    twilio
+    SmsService
       .send({
         recipient: ['ANOTHER', 'NUMBERS'],
         message: 'You can override message'
@@ -53,7 +53,7 @@ export default {
 
 ## Configuration
 
-When you instantiate new instance via `SMSService(type, config)` you can provide configuration object with next keys:
+When you instantiate new instance via `SmsService(type, config)` you can provide configuration object with next keys:
 
 - `config.provider` - {Object} Options that will go to each of SDKs
 - `config.sender` - {String} Number of sender
