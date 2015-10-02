@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.0.2
+
+- Update bluebird to 2.10.2;
+
 ## 3.0.1
 
 - Typo fixes in documentation;
