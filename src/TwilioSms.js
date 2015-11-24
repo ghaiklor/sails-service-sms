@@ -4,8 +4,8 @@ import twilio from 'twilio';
 import BaseSms from './BaseSms';
 
 export default class TwilioSms extends BaseSms {
-  constructor(...args) {
-    super(...args);
+  constructor(config) {
+    super(config);
 
     this.setProvider(twilio(this.get('provider.accountSid'), this.get('provider.authToken')));
   }
