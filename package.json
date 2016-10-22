@@ -28,7 +28,7 @@
   "dependencies": {
     "bluebird": "3.4.6",
     "lodash": "4.16.4",
-    "twilio": "2.10.0"
+    "twilio": "2.11.0"
   },
   "devDependencies": {
     "babel-cli": "6.16.0",
