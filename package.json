@@ -26,7 +26,7 @@
   },
   "homepage": "https://github.com/ghaiklor/sails-service-sms#readme",
   "dependencies": {
-    "bluebird": "3.5.1",
+    "bluebird": "3.5.2",
     "lodash": "4.17.9",
     "twilio": "4.6.0"
   },
