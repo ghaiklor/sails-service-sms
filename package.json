@@ -26,7 +26,7 @@
   },
   "homepage": "https://github.com/ghaiklor/sails-service-sms#readme",
   "dependencies": {
-    "bluebird": "3.6.0",
+    "bluebird": "3.7.1",
     "lodash": "4.17.15",
     "twilio": "4.6.0"
   },
@@ -35,10 +35,10 @@
     "babel-plugin-add-module-exports": "1.0.1",
     "babel-preset-es2015": "6.24.1",
     "chai": "4.1.2",
-    "coveralls": "3.0.5",
+    "coveralls": "3.0.7",
     "cz-conventional-changelog": "3.0.0",
     "isparta": "4.1.1",
-    "mocha": "6.2.0",
+    "mocha": "6.2.2",
     "semantic-release": "15.13.27",
     "sinon": "7.4.0"
   },
